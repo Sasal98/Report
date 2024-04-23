@@ -1,0 +1,62 @@
+---
+title: "Report"
+author: Saskia Salzmann
+editor: visual
+format:
+  html:
+    toc: true
+    code-fold: show
+    code-tools: true
+    df-print: paged 
+    embed-resources: true 
+  pdf: 
+    toc: true
+  docx:
+    toc: true
+---
+
+## Introduction
+
+The aim of this exercise is to learn how to use GitHub and create a own report.
+
+## Load Packages
+
+```{r setup, include=FALSE}
+library(psych)
+library(tidyverse)
+library(readxl)
+library(here)
+library(ggpubr)
+```
+
+## Data
+
+These are data of my own PhD project. At the moment I look at the demographics of the data. That is why I added a simple graphic of the data points and a correlation .
+
+```{r}
+demo <- read_excel(here("data", "Lesion Size and Cognition_080324.xlsx"))
+```
+
+## Process data
+
+```{r}
+PS<-demo$VG_final
+LS<-demo$`PIV (Percentage of infarct volume)`
+
+```
+
+## Visualisation
+
+```{r}
+ggplot(data = demo, mapping = aes(x = PS, y = LS)) + 
+  labs(x = "Processing Speed", y = "Lesion size") +
+  geom_point(alpha = 0.7, colour = "black", fill = "blue",
+             shape = 21, size = 1.5, stroke = 1.0) +
+  stat_cor(method = "spearman") +
+  stat_smooth(method = lm)
+
+```
+
+## Conclusions
+
+The correlation shows that the bigger the lesion size was, the worse the outcome of processing speed may be.
