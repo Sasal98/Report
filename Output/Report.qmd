@@ -1,5 +1,5 @@
 ---
-title: "Report"
+title: "Lesion size and cognition in pediatric stroke patients"
 author: Saskia Salzmann
 editor: visual
 format:
@@ -17,11 +17,12 @@ format:
 
 ## Introduction
 
-The aim of this exercise is to learn how to use GitHub and create a own report.
+Cognitive outcome after pediatric cancer is possible influenced by the size of the stroke lesion. In this study we analyse if lesion size may predict cognitive outcome in the long-term.
 
 ## Load Packages
 
-```{r setup, include=FALSE}
+```{r setup}
+#| message: false
 library(psych)
 library(tidyverse)
 library(readxl)
@@ -31,13 +32,22 @@ library(ggpubr)
 
 ## Data
 
-These are data of my own PhD project. At the moment I look at the demographics of the data. That is why I added a simple graphic of the data points and a correlation .
+The data was collected in the neuropediatric stroke registry of Switzerland.
+
+Current state: At the moment I analyse the demographics of the patients and some first correlations of different factors conducted.
 
 ```{r}
+#| message: false
 demo <- read_excel(here("data", "Lesion Size and Cognition_080324.xlsx"))
 ```
 
-## Process data
+## Define factors
+
+In the following visualization two variables will be included:
+
+-   Lesion size
+
+-   Processing speed (cognitive function)
 
 ```{r}
 PS<-demo$VG_final
@@ -46,6 +56,8 @@ LS<-demo$`PIV (Percentage of infarct volume)`
 ```
 
 ## Visualisation
+
+The graph shows the lesion size and the processing speed (two years after the stroke) of all the patients included in the analysis.
 
 ```{r}
 ggplot(data = demo, mapping = aes(x = PS, y = LS)) + 
@@ -57,6 +69,6 @@ ggplot(data = demo, mapping = aes(x = PS, y = LS)) +
 
 ```
 
-## Conclusions
+## Conclusion
 
-The correlation shows that the bigger the lesion size was, the worse the outcome of processing speed may be.
+The correlation shows that the bigger the lesion size was, the worse the outcome of processing speed may be. It will be interesting to look deeper into the factors associated with lesion size and cognition.
